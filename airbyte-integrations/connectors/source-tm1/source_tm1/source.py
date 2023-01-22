@@ -1,26 +1,50 @@
 from typing import Any, Iterable, List, Mapping, MutableMapping, Optional, Tuple
 
-import requests
 import logging
+from airbyte_cdk import AirbyteLogger
+from airbyte_cdk.models import SyncMode
 from airbyte_cdk.sources import AbstractSource
 from airbyte_cdk.sources.streams import Stream
-from airbyte_cdk.sources.streams.http import HttpStream
-
-from . import pokemon_list
+from TM1py import TM1Service
 
 logger = logging.getLogger("airbyte")
 
 class SourceTM1(AbstractSource):
-    def check_connection(self, logger, config) -> Tuple[bool, any]:
-        logger.info("Checking TM1 API connection...")
-        input_pokemon = config["pokemon_name"]
-        if input_pokemon not in pokemon_list.POKEMON_LIST:
-            result = f"Input Pokemon {input_pokemon} is invalid. Please check your spelling and input a valid Pokemon."
-            logger.info(f"PokeAPI connection failed: {result}")
-            return False, result
-        else:
-            logger.info(f"PokeAPI connection success: {input_pokemon} is a valid Pokemon")
+
+    def _get_auth_dict(self, config: Mapping[str, Any]):
+
+        # just do basic auth for now
+        host = config.get("host")
+        port = config.get("port")
+        username = config.get("username")
+        password = config.get("password")
+
+        return {
+            "address": host,
+            "port": port,
+            # "ssl": True,
+            "user": username,
+            "password": password,
+        }
+
+
+    def check_connection(self, logger: AirbyteLogger, config: Mapping[str, Any]) -> Tuple[bool, Optional[Any]]:
+        
+        try:
+            auth = self._get_auth_dict(config)
+            with TM1Service(**auth) as tm1:
+
+                name = tm1.server.get_server_name()
+
             return True, None
 
+        except Exception as e:
+            return (
+                False,
+                f"Got an exception while trying to set up the connection: {e}. "
+                f"Check the connection information provided and try again.",
+            )
+
     def streams(self, config: Mapping[str, Any]) -> List[Stream]:
-        return [Pokemon(pokemon_name=config["pokemon_name"])]
+
+        pass
