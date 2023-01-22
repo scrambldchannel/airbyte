@@ -10,13 +10,15 @@ connectionSpecification:
     host:
       type: string
       title: Host
-      description: Host of the TM1 database to be replicated.
-        "order": 0
+      description: >-
+        Host of the TM1 database to be replicated.
+      order: 0
     port:
       type: string
       title: Port
-      description: Rest API port of the TM1 database to be replicated.
-        "order": 1
+      description:  >-
+        Rest API port of the TM1 database to be replicated.
+      order: 1
     username:
       type: string
       title: Username
