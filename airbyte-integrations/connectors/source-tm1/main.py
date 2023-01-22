@@ -6,8 +6,8 @@
 import sys
 
 from airbyte_cdk.entrypoint import launch
-from source_tm1 import SourceTm1
+from source_tm1 import SourceTM1
 
 if __name__ == "__main__":
-    source = SourceTm1()
+    source = SourceTM1()
     launch(source, sys.argv[1:])
