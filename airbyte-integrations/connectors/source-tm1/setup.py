@@ -7,6 +7,7 @@ from setuptools import find_packages, setup
 
 MAIN_REQUIREMENTS = [
     "airbyte-cdk~=0.2",
+    "tm1py~=1.10.2",
 ]
 
 TEST_REQUIREMENTS = [
@@ -17,7 +18,7 @@ TEST_REQUIREMENTS = [
 
 setup(
     name="source_tm1",
-    description="Source implementation for Tm1.",
+    description="Source implementation for TM1 Rest API using TM1py.",
     author="Airbyte",
     author_email="contact@airbyte.io",
     packages=find_packages(),
