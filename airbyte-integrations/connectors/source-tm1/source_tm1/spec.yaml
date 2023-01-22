@@ -32,3 +32,9 @@ connectionSpecification:
         TM1 password.
       airbyte_secret: true
       order: 3
+    control:
+      type: boolean
+      title: Include Control Cubes
+      description: >-
+        Whether or not to include TM1 control cubes
+      order: 4
