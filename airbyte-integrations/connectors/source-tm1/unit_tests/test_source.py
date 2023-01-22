@@ -4,17 +4,17 @@
 
 from unittest.mock import MagicMock
 
-from source_tm1.source import SourceTm1
+from source_tm1.source import SourceTM1
 
 
 def test_check_connection(mocker):
-    source = SourceTm1()
+    source = SourceTM1()
     logger_mock, config_mock = MagicMock(), MagicMock()
     assert source.check_connection(logger_mock, config_mock) == (True, None)
 
 
 def test_streams(mocker):
-    source = SourceTm1()
+    source = SourceTM1()
     config_mock = MagicMock()
     streams = source.streams(config_mock)
     # TODO: replace this with your streams number
