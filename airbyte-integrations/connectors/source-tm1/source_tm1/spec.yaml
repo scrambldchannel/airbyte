@@ -7,16 +7,26 @@ connectionSpecification:
     - username
     - password
   properties:
+    host:
+      type: string
+      title: Host
+      description: Host of the TM1 database to be replicated.
+        "order": 0
+    port:
+      type: string
+      title: Port
+      description: Rest API port of the TM1 database to be replicated.
+        "order": 1
     username:
       type: string
       title: Username
       description: >-
         Your username for the TM1 server.
-      order: 0
+      order: 2
     password:
       type: string
       title: Password
       description: >-
         TM1 password.
       airbyte_secret: true
-      order: 1
+      order: 3
